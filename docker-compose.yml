@@ -9,8 +9,6 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-    environment:
-      - API_KEY=${API_KEY}
     env_file:
       - ./backend/.env
 
