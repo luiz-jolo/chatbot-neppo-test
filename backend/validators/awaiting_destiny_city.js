@@ -36,13 +36,14 @@ module.exports = async function validateDestinyCity(message, history) {
     entry.sender === "user" && entry.state === "awaiting_date"
   );
   
-  const destiny = message;
   const date = dateEntry?.text || "N/A";
+  const cidadeEncontrada = result[0].item;
 
-  const resumo = `📋 *Resumo da solicitação:*\n📅 Data: ${date}\n📍 Origem: ${originCity}\n🏁 Destino: ${destiny}\n\n1 - Confirmar \n2 - Cancelar.`;
+  const resumo = `📋 *Resumo da solicitação:*\n📅 Data: ${date}\n📍 Origem: ${originCity}\n🏁 Destino: ${cidadeEncontrada.name}\n\n1 - Confirmar \n2 - Cancelar.`;
 
   return {
     reply: resumo,
     nextState: "awaiting_confirmation",
+    metadata: cidadeEncontrada
   };
 };

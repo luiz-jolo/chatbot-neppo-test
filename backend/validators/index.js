@@ -15,7 +15,7 @@ module.exports = {
   awaiting_confirmation: awaitingConfirmation,
   awaiting_other_topic: awaitingOtherTopic,
   default: async () => ({
-    reply: "Não entendi. Vamos começar de novo.",
+    reply: "Deseja começar uma nova conversa?",
     nextState: "start",
   }),
 };
