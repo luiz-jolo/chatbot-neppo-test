@@ -145,3 +145,7 @@ Feito por **Luiz Jolo** como estudo de arquitetura de chatbot, Docker e integra�
 ## 🧠 Inspiração
 
 Este projeto foi inspirado na construção de fluxos inteligentes para bots de atendimento corporativo e na simplicidade de aplicações fullstack leves com Docker.
+
+Demonstração do chatbot utilizando entradas erradas na cidade onde a técnica de NLP FUZZY MATCH é inserida. Ex: usuário digita "sao paull" o sistema reconhece "São Paulo"
+
+![Demonstração do chatbot](./myapp.gif)
