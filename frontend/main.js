@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   let state = "start";
+  let conversationHistory = [];
 
   botSay("Olá! aqui é a Nepi 😁 estou aqui para te ajudar com a sua solicitação de viagem corporativa!");
-  handleMessage(""); 
+  handleMessage("");
 
   document.getElementById("chat-form").addEventListener("submit", function (e) {
     e.preventDefault();
@@ -23,6 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
     msg.innerHTML = text.replace(/\n/g, "<br>");
     log.appendChild(msg);
     log.scrollTop = log.scrollHeight;
+
+    if (sender === "user") {
+      conversationHistory.push({ sender, text, state });
+    } else {
+      conversationHistory.push({ sender, text });
+    }
   }
 
   function botSay(text) {
@@ -34,20 +41,23 @@ document.addEventListener("DOMContentLoaded", () => {
       const res = await fetch("http://localhost:3000/api/message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: userMessage, state }),
+        body: JSON.stringify({
+          message: userMessage,
+          state,
+          history: conversationHistory,
+        }),
       });
-
+  
       if (!res.ok) throw new Error("Erro na resposta do servidor");
-
+  
       const data = await res.json();
       botSay(data.reply);
-
-      console.log("Estado anterior:", state);
+  
       state = data.nextState;
-      console.log("Estado alterado para:", state);
-
+      console.log("Estado atualizado para:", state);
     } catch (err) {
       botSay("Erro ao se comunicar com o servidor.");
+      console.error(err);
     }
   }
 });

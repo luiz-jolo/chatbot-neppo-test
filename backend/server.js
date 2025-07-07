@@ -10,15 +10,14 @@ app.use(cors());
 app.use(express.json());
 
 app.post("/api/message", async (req, res) => {
-  const { message, state } = req.body;
+  const { message, state, history } = req.body;
 
   console.log("Mensagem:", message);
   console.log("Estado atual:", state);
 
   const validator = validators[state] || validators["default"];
-
-  const result = await validator(message);
-
+  const result = await validator(message, history);
+  
   res.json(result);
 });
 
