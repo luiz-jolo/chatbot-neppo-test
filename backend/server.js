@@ -14,6 +14,7 @@ app.post("/api/message", async (req, res) => {
 
   console.log("Mensagem:", message);
   console.log("Estado atual:", state);
+  console.log("Historico:", history);
 
   const validator = validators[state] || validators["default"];
   const result = await validator(message, history);

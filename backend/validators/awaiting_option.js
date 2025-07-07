@@ -1,7 +1,7 @@
 module.exports = async function validateOption(message) {
     if (message === "1") {
       return {
-        reply: "📅 Informe a data desejada para sua viagem (formato: DD/MM/AAAA)",
+        reply: "📅 Informe a data de partida desejada para sua viagem (formato: DD/MM/AAAA)",
         nextState: "awaiting_date",
       };
     } else if (message === "2") {

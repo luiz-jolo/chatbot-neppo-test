@@ -1,6 +1,12 @@
 module.exports = async function validateConfirmation(message, history) {
 
-  console.log("HISTORICO --", history)
+  const originEntry = history.find(entry =>
+    entry.sender === "user" && entry.state === "awaiting_origin_city"
+  );
+  const destinyEntry = history.find(entry =>
+    entry.sender === "user" && entry.state === "awaiting_destiny_city"
+  );
+  
 
   if (message === "1") {
     return {

@@ -55,9 +55,26 @@ document.addEventListener("DOMContentLoaded", () => {
   
       state = data.nextState;
       console.log("Estado atualizado para:", state);
+  
+      if (data.metadata) {
+        const lastUserIndex = conversationHistory
+          .slice()
+          .reverse()
+          .findIndex(entry => entry.sender === "user");
+      
+        if (lastUserIndex !== -1) {
+          // Corrige o índice real
+          const index = conversationHistory.length - 1 - lastUserIndex;
+          conversationHistory[index].data = data.metadata;
+          console.log("✅ Metadata adicionada ao histórico:", conversationHistory[index]);
+        }
+      }
+      
+  
     } catch (err) {
       botSay("Erro ao se comunicar com o servidor.");
       console.error(err);
     }
   }
+  
 });
